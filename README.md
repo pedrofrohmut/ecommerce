@@ -10,7 +10,7 @@ Ecommerce App with AspNetCore WebApi + React Client
   2.2. Extending UserIdentity to manage Users of the Application 
 
 3. Client created with:
-  3.1. Create React App with TypeScript
+  3.1. Create React App 
   3.2. Added ESLint with "airbnb" + react hooks support
   3.3. Added Prettier
 
