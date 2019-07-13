@@ -20,6 +20,8 @@
   "rules": {
     "semi": ["error", "never"],
     "quotes": ["error", "double", { "avoidEscape": true }],
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
     "react/jsx-filename-extension": [
       "error",
       {
