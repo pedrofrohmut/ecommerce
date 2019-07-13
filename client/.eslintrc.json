@@ -2,16 +2,9 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "es6": true,
-    "jest": true
+    "es6": true
   },
-  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
-  "extends": [
-    "airbnb",
-    "react-app",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint"
-  ],
+  "extends": "airbnb",
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -23,21 +16,20 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
   "rules": {
     "semi": ["error", "never"],
     "quotes": ["error", "double", { "avoidEscape": true }],
     "react/jsx-filename-extension": [
       "error",
       {
-        "extensions": [".tsx"]
+        "extensions": [".js", ".jsx"]
       }
     ],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "global-require": "off",
     "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }]
+    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   }
 }
