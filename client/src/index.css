@@ -48,12 +48,11 @@ input {
   width: 100%;
   padding: 8px 16px;
   border: 1px solid var(--grey5);
-  border-left: 10px solid var(--grey5);
   border-radius: 0.3em;
 }
 
 button {
-  padding: 7px 12px;
+  padding: 8px 16px;
   font-size: 1rem;
   border: 1px solid transparent;
   border-radius: 0.3em;

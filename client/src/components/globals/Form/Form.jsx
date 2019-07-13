@@ -17,6 +17,10 @@ const FormStyled = styled.form`
     display: block;
     padding: 5px 0;
   }
+
+  input {
+    border-left: 10px solid var(--grey5);
+  }
 `
 
 export default Form
