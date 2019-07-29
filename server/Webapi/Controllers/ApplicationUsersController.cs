@@ -40,7 +40,11 @@ namespace Webapi.Controllers
       try
       {
         var result = await this.userManager.CreateAsync(applicationUser, requestBody.Password);
-        return Ok(result);
+        // var userCreated = await this.userManager.FindByEmailAsync(requestBody.Email);
+        return Ok(new
+        {
+          email = requestBody.Email
+        });
       }
       catch (Exception ex)
       {

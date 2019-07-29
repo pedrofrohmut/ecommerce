@@ -1,14 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
-import Form from "../components/globals/Form/Form"
-import FormGroup from "../components/globals/Form/FormGroup"
+import Form from "../globals/Form/Form"
+import FormGroup from "../globals/Form/FormGroup"
 
 const SignUpForm = () => {
+  const [username, setUsername] = useState("")
+  const [fullname, setFullname] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirPassword] = useState("")
+
   const handleSubmit = () => {}
 
   return (
     <SignUpFormStyled>
-      <h1>Sign Up Form Styled</h1>
+      <h1>Sign Up Form</h1>
 
       <Form onSubmit={handleSubmit}>
         <FormGroup>
