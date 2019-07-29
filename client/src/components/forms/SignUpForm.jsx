@@ -13,7 +13,7 @@ const SignUpForm = () => {
   const handleSubmit = () => {}
 
   return (
-    <SignUpFormStyled>
+    <SignUpFormStyled className="SignUpForm">
       <h1>Sign Up Form</h1>
 
       <Form onSubmit={handleSubmit}>

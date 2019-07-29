@@ -2,19 +2,29 @@ import React from "react"
 import { connect } from "react-redux"
 import * as actions from "../store/actions/user"
 import styled from "styled-components"
-import SignUpForm from "../components/forms/SignUpForm"
-import PageContainer from "../components/globals/PageContainer"
 import PropTypes from "prop-types"
+
+import PageContainer from "../components/globals/PageContainer"
+
+import SignUpBottons from "../components/containers/SignUpBottons"
+import SignUpForm from "../components/forms/SignUpForm"
 
 const SignUpPage = ({ signup, history }) => {
   const handleSubmit = newUser =>
     signup(newUser).then(() => history.push("/home"))
 
   return (
-    <SignUpPageStyled>
+    <SignUpPageStyled className="SignUpPage">
       <PageContainer>
         <h1>Sign Up Page</h1>
-        <SignUpForm onSubmit={handleSubmit} />
+        <div className="columns">
+          <div className="column-form">
+            <SignUpForm onSubmit={handleSubmit} />
+          </div>
+          <div className="column-buttons">
+            <SignUpBottons />
+          </div>
+        </div>
       </PageContainer>
     </SignUpPageStyled>
   )
@@ -27,7 +37,26 @@ SignUpPage.propTypes = {
   }).isRequired,
 }
 
-const SignUpPageStyled = styled.div``
+const SignUpPageStyled = styled.div`
+  .columns {
+    display: block;
+  }
+
+  .column-form {
+    width: 100%;
+  }
+
+  .column-buttons {
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .columns {
+      display: flex;
+      justify-content: center;
+    }
+  }
+`
 
 export default connect(
   null,

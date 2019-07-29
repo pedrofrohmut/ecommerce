@@ -1,19 +1,25 @@
 import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
+import styled from "styled-components"
 
 import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage"
 
+import SiteHeader from "./components/layout/SiteHeader"
+
 const App = () => (
-  <div className="App">
-    <h1>App</h1>
+  <AppStyled>
     <BrowserRouter>
+      <SiteHeader />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/signup" component={SignUpPage} />
       </Switch>
+      {/* SiteFooter */}
     </BrowserRouter>
-  </div>
+  </AppStyled>
 )
+
+const AppStyled = styled.div``
 
 export default App
