@@ -23,7 +23,7 @@ namespace Webapi.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Register([FromBody] ApplicationUserRequest requestBody)
+    public async Task<ActionResult> SignUp([FromBody] ApplicationUserRequest requestBody)
     {
       if (!ModelState.IsValid)
       {
@@ -41,10 +41,18 @@ namespace Webapi.Controllers
       {
         var result = await this.userManager.CreateAsync(applicationUser, requestBody.Password);
         // var userCreated = await this.userManager.FindByEmailAsync(requestBody.Email);
-        return Ok(new
+        if (result.Succeeded)
         {
-          email = requestBody.Email
-        });
+          return Ok(new
+          {
+            email = requestBody.Email,
+            result
+          });
+        }
+        else
+        {
+          return BadRequest(new { errors = result.Errors });
+        }
       }
       catch (Exception ex)
       {

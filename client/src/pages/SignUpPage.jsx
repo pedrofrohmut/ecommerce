@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import * as actions from "../store/actions/user"
+import * as actions from "../store/actions/applicationUser"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
@@ -10,8 +10,10 @@ import SignUpBottons from "../components/containers/SignUpBottons"
 import SignUpForm from "../components/forms/SignUpForm"
 
 const SignUpPage = ({ signup, history }) => {
-  const handleSubmit = newUser =>
-    signup(newUser).then(() => history.push("/home"))
+  const handleSubmit = (newUser) => {
+    console.log("SignUpPage", newUser)
+    return signup(newUser).then(() => history.push("/"))
+  }
 
   return (
     <SignUpPageStyled className="SignUpPage">

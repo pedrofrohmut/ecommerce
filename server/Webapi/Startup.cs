@@ -58,9 +58,16 @@ namespace Webapi
         app.UseHsts();
       }
 
+      app.UseCors(builder =>
+      {
+        builder.WithOrigins(Configuration["ClientURL"])
+          .AllowAnyHeader()
+          .AllowAnyOrigin();
+      });
+
       app.UseAuthentication();
 
-      app.UseHttpsRedirection();
+      // app.UseHttpsRedirection();
       app.UseMvc();
     }
   }

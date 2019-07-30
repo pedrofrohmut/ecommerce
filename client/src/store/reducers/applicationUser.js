@@ -4,11 +4,11 @@ const INITIAL_STATE = {
   isConfirmed: undefined,
 }
 
-function userReducer(state = INITIAL_STATE, action) {
+function applicationUserReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     default:
       return state
   }
 }
 
-export default userReducer
+export default applicationUserReducer

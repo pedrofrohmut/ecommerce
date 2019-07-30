@@ -1,10 +1,12 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import validator from "validator"
+import PropTypes from "prop-types"
 
 import Form from "../globals/Form/Form"
 import FormGroup from "../globals/Form/FormGroup"
 import InlineError from "../globals/messages/InlineError"
+import AlertError from "../globals/messages/AlertError"
 
 const isValidUsername = username =>
   username !== ""
@@ -35,6 +37,7 @@ const INITIAL_ERRORS = {
   email: "",
   password: "",
   confirmPassword: "",
+  global: "",
 }
 
 const getFormErrors = (data) => {
@@ -70,7 +73,7 @@ const isValidForm = ({
   && password === ""
   && confirmPassword === ""
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSubmit }) => {
   const [username, setUsername] = useState("")
   const [fullname, setFullname] = useState("")
   const [email, setEmail] = useState("")
@@ -80,6 +83,7 @@ const SignUpForm = () => {
   const [errors, setErrors] = useState(INITIAL_ERRORS)
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     const formData = {
       username,
       fullname,
@@ -90,11 +94,17 @@ const SignUpForm = () => {
     const formErrors = getFormErrors(formData)
     setErrors({ ...errors, ...formErrors })
     if (isValidForm(formErrors)) {
-      console.log("VALID!!!")
-    } else {
-      console.log("Not valid")
+      onSubmit({
+        username,
+        fullname,
+        email,
+        password,
+      }).catch((err) => {
+        /* eslint-disable-next-line max-len */
+        const global = `${err.response.data.errors[0].code}: ${err.response.data.errors[0].description}`
+        setErrors({ ...errors, global })
+      })
     }
-    e.preventDefault()
   }
 
   return (
@@ -102,6 +112,8 @@ const SignUpForm = () => {
       <h1>Sign Up Form</h1>
 
       <Form onSubmit={handleSubmit}>
+        {errors.global !== "" && <AlertError text={errors.global} />}
+
         <FormGroup>
           <label>User Name</label>
           <input
@@ -172,7 +184,19 @@ const SignUpForm = () => {
   )
 }
 
+SignUpForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}
+
 const SignUpFormStyled = styled.div`
+  .AlertError {
+    margin: 10px 0 6px;
+  }
+
+  button[type="submit"] {
+    margin-top: 10px;
+  }
+
   label {
     padding-top: 2px;
   }
