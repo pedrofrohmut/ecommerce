@@ -24,6 +24,7 @@
     "func-names": "off",
     "implicit-arrow-linebreak": "off",
     "no-else-return": "off",
+    "no-nested-ternary": "off",
     "react/jsx-filename-extension": [
       "error",
       {

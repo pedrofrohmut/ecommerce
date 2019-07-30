@@ -20,6 +20,8 @@
   --grey5: #aaa;
   --grey6: #ccc;
   --grey7: #eee;
+  --errorRed: #ce1134;
+  --errorRedBackground: #fdf3f4;
 }
 
 body {
@@ -52,8 +54,8 @@ input {
 }
 
 button {
-  padding: 8px 16px;
-  font-size: 1rem;
+  padding: 10px 20px;
+  font-size: 1.15rem;
   border: 1px solid transparent;
   border-radius: 0.3em;
   background-color: var(--mainOrange);
