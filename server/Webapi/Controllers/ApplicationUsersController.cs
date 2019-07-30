@@ -27,7 +27,7 @@ namespace Webapi.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return BadRequest("Request body is invalid");
+        return BadRequest(new { message = "Request body is invalid" });
       }
 
       var applicationUser = new ApplicationUser
@@ -58,6 +58,25 @@ namespace Webapi.Controllers
       {
         throw ex;
       }
+    }
+
+    [HttpPost("signin")]
+    public async Task<ActionResult> SignIn([FromBody] SignInRequest requestBody)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(new { message = "Request body is invalid" });
+      }
+
+      var user = await this.userManager.FindByEmailAsync(requestBody.Email);
+
+      if (user == null || await this.userManager.CheckPasswordAsync(user, requestBody.Password) == false)
+      {
+        return BadRequest(new { message = "E-mail not found or password is incorrect" });
+      }
+
+      // TODO: generate Token
+      return Ok(new { token = "TODO: generate JWT" });
     }
   }
 }
