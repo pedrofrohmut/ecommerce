@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -51,7 +52,16 @@ namespace Webapi.Controllers
         }
         else
         {
-          return BadRequest(new { errors = result.Errors });
+          var error = result.Errors.ToList().First();
+          var code = error.Code;
+          var desc = error.Description;
+          return BadRequest(new
+          {
+            errors = new
+            {
+              global = code + ": " + desc
+            }
+          });
         }
       }
       catch (Exception ex)
@@ -65,18 +75,34 @@ namespace Webapi.Controllers
     {
       if (!ModelState.IsValid)
       {
-        return BadRequest(new { message = "Request body is invalid" });
+        return BadRequest(new
+        {
+          errors = new
+          {
+            global = "Request body is invalid"
+          }
+        });
       }
 
       var user = await this.userManager.FindByEmailAsync(requestBody.Email);
 
       if (user == null || await this.userManager.CheckPasswordAsync(user, requestBody.Password) == false)
       {
-        return BadRequest(new { message = "E-mail not found or password is incorrect" });
+        return BadRequest(new
+        {
+          errors = new
+          {
+            global = "E-mail not found or password is incorrect"
+          }
+        });
       }
 
       // TODO: generate Token
-      return Ok(new { token = "TODO: generate JWT" });
+      return Ok(new
+      {
+        token = "TODO: generate JWT",
+        email = requestBody.Email
+      });
     }
   }
 }

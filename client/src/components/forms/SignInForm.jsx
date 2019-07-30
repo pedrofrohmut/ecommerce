@@ -51,9 +51,7 @@ const SignInForm = ({ onSubmit }) => {
     setErrors({ ...errors, ...formErrors })
     if (isValidForm(formErrors)) {
       onSubmit({ email, password }).catch((err) => {
-        /* eslint-disable-next-line max-len */
-        const global = `${err.response.data.errors[0].code}: ${err.response.data.errors[0].description}`
-        setErrors({ ...errors, global })
+        setErrors({ ...errors, global: err.response.data.errors.global })
       })
     }
   }
@@ -89,7 +87,9 @@ const SignInForm = ({ onSubmit }) => {
           {errors.password !== "" && <InlineError text={errors.password} />}
         </FormGroup>
 
-        <button type="submit">Sign In</button>
+        <FormGroup>
+          <button type="submit">Sign In</button>
+        </FormGroup>
       </Form>
     </SignInFormStyled>
   )

@@ -100,9 +100,7 @@ const SignUpForm = ({ onSubmit }) => {
         email,
         password,
       }).catch((err) => {
-        /* eslint-disable-next-line max-len */
-        const global = `${err.response.data.errors[0].code}: ${err.response.data.errors[0].description}`
-        setErrors({ ...errors, global })
+        setErrors({ ...errors, global: err.response.data.errors.global })
       })
     }
   }
