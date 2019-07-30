@@ -6,37 +6,38 @@ import PropTypes from "prop-types"
 
 import PageContainer from "../components/globals/PageContainer"
 
-import SignUpBottons from "../components/containers/SignUpBottons"
-import SignUpForm from "../components/forms/SignUpForm"
+import SignInButtons from "../components/containers/SignInButtons"
+import SignInForm from "../components/forms/SignInForm"
 
-const SignUpPage = ({ signup, history }) => {
-  const handleSubmit = newUser => signup(newUser).then(() => history.push("/"))
+const SignInPage = ({ signin, history }) => {
+  const handleSubmit = credentials =>
+    signin(credentials).then(() => history.push("/"))
 
   return (
-    <SignUpPageStyled className="SignUpPage">
+    <SignInPageStyled className="SignInPage">
       <PageContainer>
-        <h1>Sign Up Page</h1>
+        <h1>Sign In Page</h1>
         <div className="columns">
           <div className="column-form">
-            <SignUpForm onSubmit={handleSubmit} />
+            <SignInForm onSubmit={handleSubmit} />
           </div>
           <div className="column-buttons">
-            <SignUpBottons />
+            <SignInButtons />
           </div>
         </div>
       </PageContainer>
-    </SignUpPageStyled>
+    </SignInPageStyled>
   )
 }
 
-SignUpPage.propTypes = {
-  signup: PropTypes.func.isRequired,
+SignInPage.propTypes = {
+  signin: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 }
 
-const SignUpPageStyled = styled.div`
+const SignInPageStyled = styled.div`
   .columns {
     display: block;
   }
@@ -59,5 +60,5 @@ const SignUpPageStyled = styled.div`
 
 export default connect(
   null,
-  { signup: actions.signup },
-)(SignUpPage)
+  { signin: actions.signin },
+)(SignInPage)

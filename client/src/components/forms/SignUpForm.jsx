@@ -3,8 +3,8 @@ import styled from "styled-components"
 import validator from "validator"
 import PropTypes from "prop-types"
 
-import Form from "../globals/Form/Form"
-import FormGroup from "../globals/Form/FormGroup"
+import Form from "../globals/forms/Form"
+import FormGroup from "../globals/forms/FormGroup"
 import InlineError from "../globals/messages/InlineError"
 import AlertError from "../globals/messages/AlertError"
 
@@ -26,7 +26,7 @@ const isValidEmail = email =>
 const isValidPassword = password =>
   password !== ""
   && typeof password === "string"
-  && password.length > 2
+  && password.length > 3
   && password.length <= 20
 
 const doPasswordsMatch = (password1, password2) => password1 === password2

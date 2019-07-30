@@ -5,16 +5,12 @@ import Navbar from "../navigation/Navbar"
 
 const SiteHeader = () => (
   <SiteHeaderStyled>
+    {/*
     Logo
-    {" "}
-    <br />
     Busca
-    {" "}
-    <br />
     UserManager
-    {" "}
-    <br />
     Carrinho
+        */}
     <Navbar />
   </SiteHeaderStyled>
 )
