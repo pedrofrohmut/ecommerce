@@ -19,5 +19,7 @@ namespace Webapi.RequestModels
     [Required]
     [StringLength(64)]
     public string FullName { get; set; }
+
+    public string AdminKey { get; set; }
   }
 }

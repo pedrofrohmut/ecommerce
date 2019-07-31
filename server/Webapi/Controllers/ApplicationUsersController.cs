@@ -1,8 +1,13 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Webapi.Models;
 using Webapi.RequestModels;
 
@@ -14,13 +19,16 @@ namespace Webapi.Controllers
   {
     private readonly UserManager<ApplicationUser> userManager;
     private readonly SignInManager<ApplicationUser> signInManager;
+    private readonly IConfiguration config;
 
     public ApplicationUsersController(
       UserManager<ApplicationUser> userManager,
-      SignInManager<ApplicationUser> signInManager)
+      SignInManager<ApplicationUser> signInManager,
+      IConfiguration config)
     {
       this.userManager = userManager;
       this.signInManager = signInManager;
+      this.config = config;
     }
 
     [HttpPost]
@@ -41,7 +49,17 @@ namespace Webapi.Controllers
       try
       {
         var result = await this.userManager.CreateAsync(applicationUser, requestBody.Password);
-        // var userCreated = await this.userManager.FindByEmailAsync(requestBody.Email);
+
+        // Manually added Roles in DB = "1 - Admin" & "2 - Customer"
+        if (requestBody.AdminKey != null && requestBody.AdminKey == this.config["ADMIN_KEY"])
+        {
+          await this.userManager.AddToRoleAsync(applicationUser, "Admin");
+        }
+        else
+        {
+          await this.userManager.AddToRoleAsync(applicationUser, "Customer");
+        }
+
         if (result.Succeeded)
         {
           return Ok(new
@@ -97,11 +115,35 @@ namespace Webapi.Controllers
         });
       }
 
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config["JWT_SECRET"].ToString()));
+      var algorithm = SecurityAlgorithms.HmacSha256Signature;
+
+      var role = await this.userManager.GetRolesAsync(user);
+      IdentityOptions options = new IdentityOptions();
+
+      var tokenDescriptor = new SecurityTokenDescriptor
+      {
+        Subject = new ClaimsIdentity(new Claim[]
+        {
+          new Claim("UserID", user.Id.ToString()),
+          new Claim(options.ClaimsIdentity.RoleClaimType, role.FirstOrDefault()),
+          new Claim("email", requestBody.Email),
+          new Claim("isEmailConfirmed", "false")
+        }),
+        Expires = DateTime.UtcNow.AddDays(1),
+        SigningCredentials = new SigningCredentials(key, algorithm)
+      };
+
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+      var token = tokenHandler.WriteToken(securityToken);
+
       // TODO: generate Token
       return Ok(new
       {
-        token = "TODO: generate JWT",
-        email = requestBody.Email
+        token = token,
+        email = requestBody.Email,
+        isEmailConfirmed = false // TODO: implement E-mail confirmation
       });
     }
   }

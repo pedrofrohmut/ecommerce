@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Webapi.Models;
 
 namespace Webapi
@@ -32,6 +36,7 @@ namespace Webapi
 
       services
         .AddDefaultIdentity<ApplicationUser>()
+        .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<AppDbContext>();
 
       services
@@ -43,6 +48,34 @@ namespace Webapi
           options.Password.RequireLowercase = false;
           options.Password.RequiredLength = 4;
         });
+
+      services.AddCors();
+
+      // JWT Authentication
+      var key = Encoding.UTF8.GetBytes(Configuration["JWT_SECRET"].ToString());
+      services
+        .AddAuthentication(options =>
+          {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+          })
+        .AddJwtBearer(options =>
+        {
+          options.RequireHttpsMetadata = false;
+          options.SaveToken = false;
+          options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+          {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero
+          };
+        });
+
+      // Startup Configuration in the Context
+      services.AddSingleton<IConfiguration>(Configuration);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,11 +84,6 @@ namespace Webapi
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
-      }
-      else
-      {
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
       }
 
       app.UseCors(builder =>
