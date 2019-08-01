@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Webapi.Models;
 using Webapi.RequestModels;
 using Webapi.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Webapi.Controllers
 {
@@ -31,6 +32,9 @@ namespace Webapi.Controllers
       this.tokenGenerator = tokenGenerator;
     }
 
+    /*
+      POST (Guest) /api/v1/application_users
+    */
     [HttpPost]
     public async Task<ActionResult> SignUp([FromBody] ApplicationUserRequest requestBody)
     {
@@ -67,6 +71,9 @@ namespace Webapi.Controllers
       catch (Exception ex) { throw ex; }
     }
 
+    /*
+      POST (Guest) /api/v1/application_users/signin
+    */
     [HttpPost("signin")]
     public async Task<ActionResult> SignIn([FromBody] SignInRequest requestBody)
     {
@@ -83,6 +90,32 @@ namespace Webapi.Controllers
       var token = this.tokenGenerator.GenerateAuthenticationToken(user.Id, userRole, requestBody.Email, false);
 
       return Ok(new { token = token, email = requestBody.Email, isEmailConfirmed = false });
+    }
+
+    /*
+      GET (Guest) /api/v1/application_users/{user_id}
+    */
+    [HttpGet("{user_id}")]
+    [Authorize(Roles = "Admin, Customer")]
+    public async Task<ActionResult> GetUserProfileById([FromRoute] string user_id)
+    {
+      if (user_id == "")
+        return BadRequest(new { errors = new { global = "You must inform a user id to get the profile" } });
+
+      var applicationUser = await this.userManager.FindByIdAsync(user_id);
+
+      Console.WriteLine(applicationUser);
+
+      if (applicationUser != null)
+        return Ok(new
+        {
+          userName = applicationUser.UserName,
+          fullName = applicationUser.FullName,
+          email = applicationUser.Email,
+          isEmailConfirmed = applicationUser.EmailConfirmed,
+        });
+      else
+        return BadRequest(new { errors = new { global = "User not found with the passed Id" } });
     }
   }
 }
