@@ -8,8 +8,11 @@ import PropTypes from "prop-types"
 import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage"
 import SignInPage from "./pages/SignInPage"
+import UserProfilePage from "./pages/user/UserProfilePage"
 
 import SiteHeader from "./components/layout/SiteHeader"
+import GuestRoute from "./components/routes/GuestRoute"
+import CustomerRoute from "./components/routes/CustomerRoute"
 
 const App = ({ signinWithToken }) => {
   const token = localStorage.getItem("ecommerceJWT")
@@ -21,9 +24,19 @@ const App = ({ signinWithToken }) => {
       <BrowserRouter>
         <SiteHeader />
         <Switch>
+          {/*
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/signup" component={SignUpPage} />
+            <Route exact path="/signin" component={SignInPage} />
+            */}
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/signup" component={SignUpPage} />
-          <Route exact path="/signin" component={SignInPage} />
+          <GuestRoute exact path="/signup" component={SignUpPage} />
+          <GuestRoute exact path="/signin" component={SignInPage} />
+          <CustomerRoute
+            exact
+            path="/user/profile"
+            component={UserProfilePage}
+          />
         </Switch>
         {/* SiteFooter */}
       </BrowserRouter>

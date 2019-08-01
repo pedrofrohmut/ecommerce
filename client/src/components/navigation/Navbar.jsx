@@ -31,6 +31,9 @@ const Navbar = ({ isAuthenticated, signout }) => (
                 Sign Out
               </Link>
             </li>
+            <li>
+              <Link to="/user/profile">User Profile</Link>
+            </li>
           </>
         )}
       </ul>

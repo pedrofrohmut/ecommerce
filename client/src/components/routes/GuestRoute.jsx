@@ -7,7 +7,11 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      (isAuthenticated ? <Component {...props} /> : <Redirect to="/" />)
+      (!isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/user/profile" />
+      ))
     }
   />
 )
@@ -15,7 +19,7 @@ const GuestRoute = ({ isAuthenticated, component: Component, ...rest }) => (
 GuestRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   /* eslint-disable-next-line */
-  component: PropTypes.object.isRequired,
+  component: PropTypes.any.isRequired,
 }
 
 const mapStateToProps = state => ({

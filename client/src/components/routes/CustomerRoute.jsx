@@ -15,7 +15,7 @@ const CustomerRoute = ({ isAuthenticated, component: Component, ...rest }) => (
 CustomerRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   /* eslint-disable-next-line */
-  component: PropTypes.object.isRequired,
+  component: PropTypes.any.isRequired,
 }
 
 const mapStateToProps = state => ({
