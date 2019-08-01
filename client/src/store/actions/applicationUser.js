@@ -4,6 +4,7 @@ export const applicationUserLoggedIn = function ({
   email,
   token,
   isEmailConfirmed,
+  isAuthenticated,
 }) {
   return {
     type: USER_LOGGED_IN,
@@ -11,12 +12,16 @@ export const applicationUserLoggedIn = function ({
       email,
       token,
       isEmailConfirmed,
+      isAuthenticated,
     },
   }
 }
 
-export const applicationUserLoggedOut = function () {
+export const applicationUserLoggedOut = function ({ isAuthenticated }) {
   return {
     type: USER_LOGGED_OUT,
+    applicationUser: {
+      isAuthenticated,
+    },
   }
 }

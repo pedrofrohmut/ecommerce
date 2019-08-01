@@ -7,6 +7,7 @@ import {
   setAuthorizationHeaders,
   deleteAuthorizationHeaders,
 } from "../../utils/authorizationHeaders"
+import decode from "jwt-decode"
 
 export const signup = function (newUser) {
   return function () {
@@ -28,9 +29,28 @@ export const signin = function (credentials) {
           email,
           token,
           isEmailConfirmed,
+          isAuthenticated: true,
         }),
       )
     })
+  }
+}
+
+export const signinWithToken = function (token) {
+  return function (dispatch) {
+    if (token) {
+      const payload = decode(token)
+      const { email, isEmailConfirmed } = payload
+      setAuthorizationHeaders(token)
+      dispatch(
+        applicationUserLoggedIn({
+          email,
+          token,
+          isEmailConfirmed: isEmailConfirmed === "True",
+          isAuthenticated: true,
+        }),
+      )
+    }
   }
 }
 
@@ -38,6 +58,10 @@ export const signout = function () {
   return function (dispatch) {
     localStorage.removeItem("ecommerceJWT")
     deleteAuthorizationHeaders()
-    dispatch(applicationUserLoggedOut())
+    dispatch(
+      applicationUserLoggedOut({
+        isAuthenticated: false,
+      }),
+    )
   }
 }
