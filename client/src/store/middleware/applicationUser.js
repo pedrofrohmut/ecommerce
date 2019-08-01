@@ -1,5 +1,12 @@
 import api from "../../api/api"
-import { applicationUserLoggedIn } from "../actions/applicationUser"
+import {
+  applicationUserLoggedIn,
+  applicationUserLoggedOut,
+} from "../actions/applicationUser"
+import {
+  setAuthorizationHeaders,
+  deleteAuthorizationHeaders,
+} from "../../utils/authorizationHeaders"
 
 export const signup = function (newUser) {
   return function () {
@@ -14,8 +21,8 @@ export const signin = function (credentials) {
   return function (dispatch) {
     return api.applicationUser.signin(credentials).then((applicationUser) => {
       const { email, token, isEmailConfirmed } = applicationUser
-      localStorage.ecommerceJWT = token
-      // setAuthorizationHeaders(applicationUser.token)
+      localStorage.setItem("ecommerceJWT", token)
+      setAuthorizationHeaders(applicationUser.token)
       dispatch(
         applicationUserLoggedIn({
           email,
@@ -24,5 +31,13 @@ export const signin = function (credentials) {
         }),
       )
     })
+  }
+}
+
+export const signout = function () {
+  return function (dispatch) {
+    localStorage.removeItem("ecommerceJWT")
+    deleteAuthorizationHeaders()
+    dispatch(applicationUserLoggedOut())
   }
 }

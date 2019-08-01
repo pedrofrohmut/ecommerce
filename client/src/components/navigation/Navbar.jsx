@@ -1,10 +1,13 @@
 import React from "react"
+import { connect } from "react-redux"
+import * as middleware from "../../store/middleware/applicationUser"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 import PageContainer from "../globals/PageContainer"
 
-const Navbar = () => (
+const Navbar = ({ signout }) => (
   <NavbarStyled>
     <PageContainer>
       <ul>
@@ -17,10 +20,19 @@ const Navbar = () => (
         <li>
           <Link to="/signin">Sign In</Link>
         </li>
+        <li>
+          <Link to="/" onClick={() => signout()}>
+            Sign Out
+          </Link>
+        </li>
       </ul>
     </PageContainer>
   </NavbarStyled>
 )
+
+Navbar.propTypes = {
+  signout: PropTypes.func.isRequired,
+}
 
 const NavbarStyled = styled.div`
   background-color: var(--mainOrange);
@@ -45,4 +57,7 @@ const NavbarStyled = styled.div`
   }
 `
 
-export default Navbar
+export default connect(
+  null,
+  { signout: middleware.signout },
+)(Navbar)

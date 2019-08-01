@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN } from "../types/applicationUser"
+import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types/applicationUser"
 
 export const applicationUserLoggedIn = function ({
   email,
@@ -12,5 +12,11 @@ export const applicationUserLoggedIn = function ({
       token,
       isEmailConfirmed,
     },
+  }
+}
+
+export const applicationUserLoggedOut = function () {
+  return {
+    type: USER_LOGGED_OUT,
   }
 }
