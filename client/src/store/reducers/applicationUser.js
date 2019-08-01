@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN } from "../actions/types"
+import { USER_LOGGED_IN } from "../types/applicationUser"
 
 const INITIAL_STATE = {
   email: undefined,

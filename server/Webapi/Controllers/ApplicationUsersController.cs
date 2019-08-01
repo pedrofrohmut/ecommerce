@@ -1,3 +1,10 @@
+/*
+  TODO:
+    1. E-mail confirmation - with confirmation token
+    2. Reset Password Request - send request password e-mail (reset password token)
+    3. Validate Token - don't remember why
+    4. Reset Password - valid reset password token + new password == new password set
+*/
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,7 +46,11 @@ namespace Webapi.Controllers
     public async Task<ActionResult> SignUp([FromBody] ApplicationUserRequest requestBody)
     {
       if (!ModelState.IsValid)
-        return BadRequest(new { message = "Request body is invalid" });
+        return BadRequest(new { errors = new { global = "Request body is invalid" } });
+
+      var testEmailUnique = await this.userManager.FindByEmailAsync(requestBody.Email);
+      if (testEmailUnique != null)
+        return BadRequest(new { errors = new { global = "This e-mail is already taken" } });
 
       var applicationUser = new ApplicationUser
       {

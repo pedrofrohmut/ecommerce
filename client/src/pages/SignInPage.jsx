@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import * as actions from "../store/actions/applicationUser"
+import * as middleware from "../store/middleware/applicationUser"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
@@ -60,5 +60,5 @@ const SignInPageStyled = styled.div`
 
 export default connect(
   null,
-  { signin: actions.signin },
+  { signin: middleware.signin },
 )(SignInPage)
