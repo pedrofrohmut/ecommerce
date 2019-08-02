@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Webapi.Models;
 using Webapi.Repositories;
+using Webapi.Repositories.Impl;
 
 namespace Webapi
 {
@@ -24,6 +25,8 @@ namespace Webapi
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+      services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
       services
         .AddEntityFrameworkNpgsql()
@@ -73,7 +76,9 @@ namespace Webapi
       // Startup Configuration in the Context
       services.AddSingleton<IConfiguration>(Configuration);
 
+      // REPOSITORIES
       services.AddScoped<TokenGenerator>();
+      services.AddScoped<IProductsService, ProductsService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

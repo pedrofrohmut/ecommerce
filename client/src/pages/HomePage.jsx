@@ -1,11 +1,13 @@
 import React from "react"
 import styled from "styled-components"
+
 import PageContainer from "../components/globals/PageContainer"
+import ListTitle from "../components/globals/titles/ListTitle"
 
 const HomePage = () => (
   <HomePageStyled>
     <PageContainer>
-      <h1>Home Page</h1>
+      <ListTitle text="Ofertas em destaque" />
     </PageContainer>
   </HomePageStyled>
 )

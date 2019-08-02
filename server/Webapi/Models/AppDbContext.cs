@@ -8,5 +8,7 @@ namespace Webapi.Models
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+    public DbSet<Product> Products { get; set; }
   }
 }
