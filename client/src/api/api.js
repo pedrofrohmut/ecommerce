@@ -14,4 +14,10 @@ export default {
         })
         .then(response => response.data),
   },
+  products: {
+    getAll: () =>
+      axios
+        .get("http:///localhost:5000/api/v1/products")
+        .then(response => response.data),
+  },
 }
