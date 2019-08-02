@@ -12,27 +12,35 @@ const Navbar = ({ isAuthenticated, signout }) => (
     <PageContainer>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
         </li>
         {!isAuthenticated && (
           <>
             <li>
-              <Link to="/signup">Sign Up</Link>
+              <Link className="nav-link" to="/signup">
+                Sign Up
+              </Link>
             </li>
             <li>
-              <Link to="/signin">Sign In</Link>
+              <Link className="nav-link" to="/signin">
+                Sign In
+              </Link>
             </li>
           </>
         )}
         {isAuthenticated && (
           <>
             <li>
-              <Link to="/" onClick={() => signout()}>
+              <Link className="nav-link" to="/" onClick={() => signout()}>
                 Sign Out
               </Link>
             </li>
             <li>
-              <Link to="/user/profile">User Profile</Link>
+              <Link className="nav-link" to="/user/profile">
+                User Profile
+              </Link>
             </li>
           </>
         )}
@@ -58,13 +66,27 @@ const NavbarStyled = styled.div`
     display: inline-block;
   }
 
-  a {
+  .nav-link {
     color: var(--fullWhite);
     margin-right: 25px;
+    position: relative;
+    outline: 0;
 
-    &:hover,
-    &:focus {
-      text-decoration: underline;
+    &::after {
+      content: "";
+      background-color: #fff;
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      transform: scaleY(0);
+      transition: transform 0.3s;
+    }
+
+    &:hover:after,
+    &:focus:after {
+      transform: scaleY(1);
     }
   }
 `
