@@ -10,8 +10,9 @@ ListTitle.propTypes = {
 
 const ListTitleStyled = styled.div`
   color: var(--mainBlue);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 600;
+  padding: 6px 0 12px;
 `
 
 export default ListTitle
