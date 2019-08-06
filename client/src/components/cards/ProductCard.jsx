@@ -85,10 +85,47 @@ const ProductCardStyled = styled.div`
     font-weight: 300;
     text-align: justify;
     margin-bottom: 7px;
+    height: 100px;
+    overflow-y: hidden;
   }
 
   .CardStars {
     margin-bottom: 7px;
+  }
+
+  @media (min-width: 480px) {
+    /*TODO: make the MD right*/
+  }
+
+  @media (min-width: 768px) {
+    width: 46%;
+    max-width: 360px;
+    float: left;
+    margin-left: 20px;
+    padding: 1.2rem;
+
+    .CardImage {
+      width: 60%;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .card-company {
+      font-size: 0.8rem;
+      margin-bottom: 3px;
+    }
+
+    .card-info {
+      font-size: 0.6rem;
+      margin-bottom: 3px;
+    }
+
+    .CardStar {
+      margin-bottom: 3px;
+    }
   }
 `
 

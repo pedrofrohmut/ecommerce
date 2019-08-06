@@ -31,6 +31,27 @@ ProductList.propTypes = {
   }).isRequired,
 }
 
-const ProductListStyled = styled.div``
+const ProductListStyled = styled.div`
+  .ProductCard {
+    margin-bottom: 25px;
+  }
+
+  & > ul {
+    margin: 0 auto;
+    border: 1px red dashed;
+  }
+
+  @media (min-width: 480px) {
+    & > ul {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    & > ul {
+      max-width: 1200px;
+    }
+  }
+`
 
 export default ProductList

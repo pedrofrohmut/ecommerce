@@ -32,6 +32,7 @@ CardPrice.propTypes = {
 
 const CardPriceStyled = styled.div`
   .old-price {
+    padding-left: 2px;
     font-size: 1.4rem;
     font-weight: 300;
     color: var(--grey5);
@@ -89,6 +90,36 @@ const CardPriceStyled = styled.div`
     border-left: 1px solid var(--grey6);
     border-right: 1px solid var(--grey6);
     border-radius: 0 0 0.4em 0.4em;
+  }
+
+  @media (min-width: 768px) {
+    .old-price {
+      font-size: 1.1rem;
+      margin-bottom: -13px;
+    }
+
+    .price {
+      font-size: 2.1rem;
+      margin-bottom: 0;
+    }
+
+    .discount {
+      font-size: 0.7rem;
+    }
+
+    .parcel-num {
+      font-size: 1rem;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+
+    .parcel-val {
+      font-size: 1.1rem;
+    }
+
+    .parcel-info {
+      font-size: 0.85rem;
+    }
   }
 `
 

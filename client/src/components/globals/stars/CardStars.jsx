@@ -46,6 +46,10 @@ const CardStarsStyled = styled.div`
     display: inline-block;
     color: var(--mainOrange);
   }
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 `
 
 export default CardStars
