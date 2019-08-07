@@ -10,13 +10,31 @@
   font-size: 16px;
   --mainWhite: #f6f7f9;
   --mainBlack: #333;
+
+  --mainOrange-3: #7b4404;
+  --mainOrange-2: #ac5f06;
+  --mainOrange-1: #dd7a08;
   --mainOrange: #f7901c;
+  --mainOrange1: #f89f3a;
+  --mainOrange2: #fab76b;
+  --mainOrange3: #fbcf9d;
+  --mainOrange4: #fde7ce;
+
+  --mainBlue-3: #041a2f;
+  --mainBlue-2: #09345d;
+  --mainBlue-1: #0d4f8c;
   --mainBlue: #105fab;
   --mainBlue1: #1683e9;
   --mainBlue2: #5ca8f0;
+  --mainBlue3: #8ac1f4;
+  --mainBlue4: #b9daf8;
+
   --fullBlack: #000;
+
   --fullWhite: #fff;
+
   --lightYellow: #ffff66;
+
   --grey1: #222;
   --grey2: #444;
   --grey3: #666;
@@ -24,6 +42,7 @@
   --grey5: #aaa;
   --grey6: #ccc;
   --grey7: #eee;
+
   --errorRed: #ce1134;
   --errorRedBackground: #fdf3f4;
 }

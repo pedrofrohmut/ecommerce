@@ -39,7 +39,6 @@ const ProductListStyled = styled.div`
   }
 
   .product-list-item {
-    border: 1px blue dashed;
     display: block;
     width: 100%;
     max-width: 364px;

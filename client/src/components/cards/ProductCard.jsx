@@ -3,12 +3,14 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
+import { limitText } from "../../utils/format"
+
 import CardImage from "../globals/images/CardImage"
 import CardStars from "../globals/stars/CardStars"
 import CardPrice from "./CardPrice"
-// import CardButtonComprar from "./CardButtonComprar"
-// import CardButtonDetails from "./CardButtonDetails"
-// import CardTags from "./CardTags"
+import CardButtonComprar from "./CardButtonComprar"
+import CardButtonDetails from "./CardButtonDetails"
+import TagList from "./TagList"
 
 const ProductCard = ({ product }) => {
   const {
@@ -21,6 +23,16 @@ const ProductCard = ({ product }) => {
   const parcelNum = 12
   const parcelVal = price / 12
   const discount = 10
+  const tags = [
+    {
+      href: "/products/phone",
+      text: "phones",
+    },
+    {
+      href: "products/smartphones/",
+      text: "smartphones",
+    },
+  ]
 
   return (
     <Link to={`products/detail/${id}`}>
@@ -28,7 +40,7 @@ const ProductCard = ({ product }) => {
         <CardImage src={image} />
         <div className="card-title">{title}</div>
         <div className="card-company">{company}</div>
-        <div className="card-info">{info}</div>
+        <div className="card-info">{limitText(info, 240, true)}</div>
         <CardStars num={stars} />
         <CardPrice
           oldPrice={oldPrice}
@@ -37,9 +49,11 @@ const ProductCard = ({ product }) => {
           parcelVal={parcelVal}
           discount={discount}
         />
-        {/* <CardButtonComprar />
-        <CardButtonDetails />
-        <CardTags product={product} /> */}
+        <div className="buttons">
+          <CardButtonComprar />
+          <CardButtonDetails />
+        </div>
+        <TagList tags={tags} />
       </ProductCardStyled>
     </Link>
   )
@@ -91,6 +105,16 @@ const ProductCardStyled = styled.div`
 
   .CardStars {
     margin-bottom: 3px;
+  }
+
+  .CardPrice {
+    margin-bottom: 13px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-buttom: 6px;
   }
 
   @media (min-width: 480px) {
