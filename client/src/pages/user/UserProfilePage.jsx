@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import PageContainer from "../../components/globals/PageContainer"
+import PageContainer from "../../components/globals/containers/PageContainer"
 
 const UserProfilePage = () => (
   <UserProfilePageStyled className="UserProfilePage">

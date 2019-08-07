@@ -4,7 +4,7 @@ import * as middleware from "../store/middleware/applicationUser"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
-import PageContainer from "../components/globals/PageContainer"
+import PageContainer from "../components/globals/containers/PageContainer"
 
 import SignInButtons from "../components/containers/SignInButtons"
 import SignInForm from "../components/forms/SignInForm"

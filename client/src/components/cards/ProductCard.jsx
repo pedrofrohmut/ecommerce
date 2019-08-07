@@ -34,28 +34,34 @@ const ProductCard = ({ product }) => {
     },
   ]
 
+  const handleComprar = () => {
+    // TODO: comprar passando id
+  }
+
+  const handleDetails = () => {
+    // TODO: redirect to product/details/{id}
+  }
+
   return (
-    <Link to={`products/detail/${id}`}>
-      <ProductCardStyled className="ProductCard">
-        <CardImage src={image} />
-        <div className="card-title">{title}</div>
-        <div className="card-company">{company}</div>
-        <div className="card-info">{limitText(info, 240, true)}</div>
-        <CardStars num={stars} />
-        <CardPrice
-          oldPrice={oldPrice}
-          price={price}
-          parcelNum={parcelNum}
-          parcelVal={parcelVal}
-          discount={discount}
-        />
-        <div className="buttons">
-          <CardButtonComprar />
-          <CardButtonDetails />
-        </div>
-        <TagList tags={tags} />
-      </ProductCardStyled>
-    </Link>
+    <ProductCardStyled className="ProductCard">
+      <CardImage src={image} />
+      <div className="card-title">{title}</div>
+      <div className="card-company">{company}</div>
+      <div className="card-info">{limitText(info, 240, true)}</div>
+      <CardStars num={stars} />
+      <CardPrice
+        oldPrice={oldPrice}
+        price={price}
+        parcelNum={parcelNum}
+        parcelVal={parcelVal}
+        discount={discount}
+      />
+      <div className="buttons">
+        <CardButtonComprar onClick={handleComprar} />
+        <CardButtonDetails onClick={handleDetails} />
+      </div>
+      <TagList tags={tags} />
+    </ProductCardStyled>
   )
 }
 ProductCard.propTypes = {
@@ -114,7 +120,10 @@ const ProductCardStyled = styled.div`
   .buttons {
     display: flex;
     justify-content: space-between;
-    margin-buttom: 6px;
+  }
+
+  .TagList {
+    margin-top: 6px;
   }
 
   @media (min-width: 480px) {

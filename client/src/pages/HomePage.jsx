@@ -4,21 +4,34 @@ import api from "../api/api"
 
 import ProductList from "../components/containers/ProductList"
 
-import PageContainer from "../components/globals/PageContainer"
+import PageContainer from "../components/globals/containers/PageContainer"
 import ListTitle from "../components/globals/titles/ListTitle"
+import LoadingSpinner from "../components/globals/loading/LoadingSpinner"
 
 const HomePage = () => {
   const [products, setProducts] = useState([])
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
 
   useEffect(() => {
-    api.products.getAll().then(fetchedProducts => setProducts(fetchedProducts))
+    api.products.getAll().then((fetchedProducts) => {
+      setTimeout(() => {
+        setProducts(fetchedProducts)
+        setIsLoadingProducts(false)
+      }, 250)
+    })
   }, [])
 
   return (
     <HomePageStyled className="HomePage">
       <PageContainer>
-        <ListTitle text="Ofertas em destaque" />
-        <ProductList products={products} />
+        {isLoadingProducts && <LoadingSpinner text="Loading Products..." />}
+
+        {!isLoadingProducts && (
+          <>
+            <ListTitle text="Ofertas em destaque" />
+            <ProductList products={products} />
+          </>
+        )}
       </PageContainer>
     </HomePageStyled>
   )

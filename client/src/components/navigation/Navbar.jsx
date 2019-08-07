@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
-import PageContainer from "../globals/PageContainer"
+import PageContainer from "../globals/containers/PageContainer"
 
 const Navbar = ({ isAuthenticated, signout }) => (
   <NavbarStyled>
