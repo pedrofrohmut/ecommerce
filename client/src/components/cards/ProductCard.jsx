@@ -56,76 +56,47 @@ ProductCard.propTypes = {
 }
 
 const ProductCardStyled = styled.div`
-  padding: 2rem;
-  max-width: 480px;
+  padding: 1.2rem;
+  max-width: 450px;
   border: 1px solid var(--grey6);
   border-radius: 0.3em;
 
   .CardImage {
-    width: 70%;
+    width: 50%;
     margin: 0 auto 12px;
   }
 
   .card-title {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
   }
 
   .card-company {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     color: var(--grey5);
     font-weight: 500;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
   }
 
   .card-info {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--grey4);
     font-weight: 300;
     text-align: justify;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
     height: 100px;
     overflow-y: hidden;
   }
 
   .CardStars {
-    margin-bottom: 7px;
+    margin-bottom: 3px;
   }
 
   @media (min-width: 480px) {
-    /*TODO: make the MD right*/
   }
 
   @media (min-width: 768px) {
-    width: 46%;
-    max-width: 360px;
-    float: left;
-    margin-left: 20px;
-    padding: 1.2rem;
-
-    .CardImage {
-      width: 60%;
-    }
-
-    .card-title {
-      font-size: 1rem;
-      margin-bottom: 3px;
-    }
-
-    .card-company {
-      font-size: 0.8rem;
-      margin-bottom: 3px;
-    }
-
-    .card-info {
-      font-size: 0.6rem;
-      margin-bottom: 3px;
-    }
-
-    .CardStar {
-      margin-bottom: 3px;
-    }
   }
 `
 

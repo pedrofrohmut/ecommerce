@@ -33,21 +33,21 @@ CardPrice.propTypes = {
 const CardPriceStyled = styled.div`
   .old-price {
     padding-left: 2px;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 300;
     color: var(--grey5);
-    margin-bottom: -21px;
+    margin-bottom: -13px;
   }
 
   .price {
-    font-size: 3rem;
+    font-size: 2.1rem;
     font-weight: 700;
     color: var(--mainBlue);
-    margin-bottom: -14px;
+    margin-bottom: 0;
   }
 
   .discount {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: var(--grey5);
     text-transform: uppercase;
     text-align: left;
@@ -62,18 +62,19 @@ const CardPriceStyled = styled.div`
   .parcel-num {
     color: var(--lightYellow);
     background-color: var(--mainBlue1);
-    padding: 7px 13px 7px 10px;
     font-weight: 700;
     width: 20%;
     border-radius: 0.4em 0 0 0;
     text-align: center;
+    font-size: 1rem;
+    padding: 2px 0;
   }
 
   .parcel-val {
     font-weight: 700;
     color: var(--fullWhite);
     background-color: var(--mainBlue2);
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     padding: 1px 0 0 0;
     text-align: center;
     width: 80%;
@@ -81,7 +82,7 @@ const CardPriceStyled = styled.div`
   }
 
   .parcel-info {
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: var(--grey5);
     font-weght: 300;
     text-align: center;
@@ -93,33 +94,6 @@ const CardPriceStyled = styled.div`
   }
 
   @media (min-width: 768px) {
-    .old-price {
-      font-size: 1.1rem;
-      margin-bottom: -13px;
-    }
-
-    .price {
-      font-size: 2.1rem;
-      margin-bottom: 0;
-    }
-
-    .discount {
-      font-size: 0.7rem;
-    }
-
-    .parcel-num {
-      font-size: 1rem;
-      padding-top: 2px;
-      padding-bottom: 2px;
-    }
-
-    .parcel-val {
-      font-size: 1.1rem;
-    }
-
-    .parcel-info {
-      font-size: 0.85rem;
-    }
   }
 `
 

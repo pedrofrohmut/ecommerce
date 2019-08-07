@@ -7,9 +7,11 @@ import ProductCard from "../cards/ProductCard"
 const ProductList = ({ products }) => (
   <ProductListStyled className="ProductList">
     {products.length > 0 && (
-      <ul>
+      <ul className="product-list">
         {products.map(product => (
-          <ProductCard product={product} key={product.id} />
+          <li key={product.id} className="product-list-item">
+            <ProductCard product={product} />
+          </li>
         ))}
       </ul>
     )}
@@ -32,24 +34,35 @@ ProductList.propTypes = {
 }
 
 const ProductListStyled = styled.div`
-  .ProductCard {
-    margin-bottom: 25px;
+  .product-list {
+    margin: 0 auto;
   }
 
-  & > ul {
-    margin: 0 auto;
-    border: 1px red dashed;
+  .product-list-item {
+    border: 1px blue dashed;
+    display: block;
+    width: 100%;
+    max-width: 364px;
+    margin: 0 auto 25px;
   }
 
   @media (min-width: 480px) {
-    & > ul {
-      max-width: 768px;
+    .product-list-item {
+      width: 100%;
     }
   }
 
   @media (min-width: 768px) {
-    & > ul {
-      max-width: 1200px;
+    .product-list-item {
+      float: left;
+      width: 47%;
+      margin-left: 20px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .product-list-item {
+      width: 31%;
     }
   }
 `
