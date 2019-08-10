@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
-import ProductCard from "../cards/ProductCard"
+import MaratonaProductCard from "../cards/MaratonaProductCard"
 
 const MaratonaProductList = ({ products }) => (
   <MaratonaProductListStyled className="MaratonaProductList">
@@ -10,7 +10,7 @@ const MaratonaProductList = ({ products }) => (
       <ul className="product-list">
         {products.map(product => (
           <li key={product.id} className="product-list-item">
-            <ProductCard product={product} />
+            <MaratonaProductCard product={product} />
           </li>
         ))}
       </ul>

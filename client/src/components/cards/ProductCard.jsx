@@ -64,6 +64,7 @@ const ProductCard = ({ product }) => {
     </ProductCardStyled>
   )
 }
+
 ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string.isRequired,
