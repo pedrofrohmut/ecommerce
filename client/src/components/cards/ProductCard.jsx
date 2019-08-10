@@ -90,6 +90,7 @@ const ProductCardStyled = styled.div`
     font-size: 1rem;
     font-weight: 700;
     margin-bottom: 3px;
+    height: 50px;
   }
 
   .card-company {
