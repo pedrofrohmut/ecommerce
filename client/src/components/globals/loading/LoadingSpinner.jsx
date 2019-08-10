@@ -30,6 +30,7 @@ const LoadingSpinnerStyled = styled.div`
 
   .fa-spin {
     animation-duration: 3.3s;
+    margin-bottom: 2rem;
   }
 `
 
