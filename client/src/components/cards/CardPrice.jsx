@@ -92,9 +92,6 @@ const CardPriceStyled = styled.div`
     border-right: 1px solid var(--grey6);
     border-radius: 0 0 0.4em 0.4em;
   }
-
-  @media (min-width: 768px) {
-  }
 `
 
 export default CardPrice

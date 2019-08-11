@@ -22,12 +22,13 @@ CardOfferExpiresOn.propTypes = {
 }
 
 const CardOfferExpiresOnStyled = styled.div`
-  background-color: var(--mainRed);
+  background-color: var(--mainRed-1);
   color: var(--fullBlack);
+  opacity: 0.9;
 
   width: calc(100% + 2.4rem);
   margin-left: -1.2rem;
-  padding: 0.6rem;
+  padding: 0.5rem 0 0.2rem;
   font-weight: 700;
 
   display: flex;
@@ -40,13 +41,20 @@ const CardOfferExpiresOnStyled = styled.div`
     width: 100px;
   }
 
+  .offer-text {
+    padding-left: 1rem;
+  }
+
   .offer-text-text {
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    font-weight: 900;
   }
 
   .offer-time {
-    font-size: 1.5rem;
+    margin-top: -9px;
+    font-size: 2rem;
+    font-weight: 700;
   }
 `
 

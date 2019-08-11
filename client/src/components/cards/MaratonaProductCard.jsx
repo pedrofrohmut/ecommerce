@@ -4,19 +4,38 @@ import PropTypes from "prop-types"
 
 import CardImage from "../globals/images/CardImage"
 import CardOfferExpiresOn from "./CardOfferExpiresOn"
+import CardOfferInfo from "./CardOfferInfo"
+import MaratonaCardPrice from "./MaratonaCardPrice"
+import MaratonaCardButtonComprar from "./MaratonaCardButtonComprar"
 
 const MarantonaProductCard = ({ product }) => {
   const {
-    id, title, image, price, company, info,
+    id, title, image, price,
   } = product
 
   // Testing Variables
   const expirationTime = Math.floor(Math.random() * 200000)
+  const offerDiscount = Math.floor(Math.random() * 25 + 5)
+  const offerAmount = Math.floor(Math.random() * 1200 + 25)
+  const oldPrice = price * 1.2
+  const discount = 15
+
+  const handleComprar = () => {
+    // TODO: maratona comprar passando id
+  }
 
   return (
     <MarantonaProductCardStyled className="MarantonaProductCard">
       <CardImage src={image} />
       <CardOfferExpiresOn expirationTime={expirationTime} />
+      <CardOfferInfo discount={offerDiscount} amount={offerAmount} />
+      <div className="card-title">{title}</div>
+      <MaratonaCardPrice
+        oldPrice={oldPrice}
+        price={price}
+        discount={discount}
+      />
+      <MaratonaCardButtonComprar onClick={handleComprar} />
     </MarantonaProductCardStyled>
   )
 }
@@ -35,12 +54,17 @@ MarantonaProductCard.propTypes = {
 const MarantonaProductCardStyled = styled.div`
   padding: 1.2rem;
   max-width: 450px;
-  border: 2px solid var(--mainRed);
+  border: 2px solid var(--mainRed-1);
   border-radius: 0.3em;
 
   .CardImage {
     width: 50%;
     margin: 0 auto 12px;
+    padding: 1rem 0 1.5rem;
+  }
+
+  .CardOfferInfo {
+    margin-bottom: 0.8rem;
   }
 
   .card-title {
@@ -50,44 +74,8 @@ const MarantonaProductCardStyled = styled.div`
     height: 50px;
   }
 
-  .card-company {
-    font-size: 0.8rem;
-    color: var(--grey5);
-    font-weight: 500;
-    margin-bottom: 3px;
-  }
-
-  .card-info {
-    font-size: 0.75rem;
-    color: var(--grey4);
-    font-weight: 300;
-    text-align: justify;
-    margin-bottom: 3px;
-    height: 100px;
-    overflow-y: hidden;
-  }
-
-  .CardStars {
-    margin-bottom: 3px;
-  }
-
-  .CardPrice {
+  .MaratonaCardPrice {
     margin-bottom: 13px;
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .TagList {
-    margin-top: 6px;
-  }
-
-  @media (min-width: 480px) {
-  }
-
-  @media (min-width: 768px) {
   }
 `
 
