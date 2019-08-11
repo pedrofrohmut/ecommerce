@@ -18,6 +18,7 @@ const MarantonaProductCard = ({ product }) => {
   const offerDiscount = Math.floor(Math.random() * 25 + 5)
   const offerAmount = Math.floor(Math.random() * 1200 + 25)
   const oldPrice = price * 1.2
+  const newPrice = price * 0.8
   const discount = 15
 
   const handleComprar = () => {
@@ -32,7 +33,7 @@ const MarantonaProductCard = ({ product }) => {
       <div className="card-title">{title}</div>
       <MaratonaCardPrice
         oldPrice={oldPrice}
-        price={price}
+        price={newPrice}
         discount={discount}
       />
       <MaratonaCardButtonComprar onClick={handleComprar} />

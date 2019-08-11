@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
   } = product
 
   // Testing Variables
-  const stars = 3.5
+  const stars = Math.floor(Math.random() * 10 + 1) / 2
   const oldPrice = price * 1.2
   const parcelNum = 12
   const parcelVal = price / 12
