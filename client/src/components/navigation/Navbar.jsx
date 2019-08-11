@@ -19,13 +19,13 @@ const Navbar = ({ isAuthenticated, signout }) => (
         {!isAuthenticated && (
           <>
             <li>
-              <Link className="nav-link" to="/signup">
-                Sign Up
+              <Link className="nav-link" to="/signin">
+                Sign In
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/signin">
-                Sign In
+              <Link className="nav-link" to="/signup">
+                Sign Up
               </Link>
             </li>
           </>
@@ -33,13 +33,13 @@ const Navbar = ({ isAuthenticated, signout }) => (
         {isAuthenticated && (
           <>
             <li>
-              <Link className="nav-link" to="/" onClick={() => signout()}>
-                Sign Out
+              <Link className="nav-link" to="/user/profile">
+                User Profile
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/user/profile">
-                User Profile
+              <Link className="nav-link" to="/" onClick={() => signout()}>
+                Sign Out
               </Link>
             </li>
           </>

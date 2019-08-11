@@ -70,7 +70,7 @@ namespace Webapi.Controllers
           await this.userManager.AddToRoleAsync(applicationUser, "Customer");
 
         if (result.Succeeded)
-          return Ok(new { email = requestBody.Email, result });
+          return Ok(new { email = requestBody.Email });
         else
         {
           var error = result.Errors.ToList().First();

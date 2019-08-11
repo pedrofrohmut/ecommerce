@@ -7,6 +7,7 @@ import Form from "../globals/forms/Form"
 import FormGroup from "../globals/forms/FormGroup"
 import InlineError from "../globals/messages/InlineError"
 import AlertError from "../globals/messages/AlertError"
+import LoadingSpinner from "../globals/loading/LoadingSpinner"
 
 const isValidUsername = username =>
   username !== ""
@@ -80,6 +81,8 @@ const SignUpForm = ({ onSubmit }) => {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirPassword] = useState("")
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const [errors, setErrors] = useState(INITIAL_ERRORS)
 
   const handleSubmit = (e) => {
@@ -94,13 +97,19 @@ const SignUpForm = ({ onSubmit }) => {
     const formErrors = getFormErrors(formData)
     setErrors({ ...errors, ...formErrors })
     if (isValidForm(formErrors)) {
+      setIsLoading(true)
       onSubmit({
         username,
         fullname,
         email,
         password,
       }).catch((err) => {
-        setErrors({ ...errors, global: err.response.data.errors.global })
+        setIsLoading(false)
+        if (err.response) {
+          setErrors({ ...errors, global: err.response.data.errors.global })
+        } else {
+          setErrors({ ...errors, global: "No response from the server" })
+        }
       })
     }
   }
@@ -109,75 +118,79 @@ const SignUpForm = ({ onSubmit }) => {
     <SignUpFormStyled className="SignUpForm">
       <h1>Sign Up Form</h1>
 
-      <Form onSubmit={handleSubmit}>
-        {errors.global !== "" && <AlertError text={errors.global} />}
+      {isLoading && <LoadingSpinner text="Trying to signup new user..." />}
 
-        <FormGroup>
-          <label>User Name</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-          {errors.username !== "" && <InlineError text={errors.username} />}
-        </FormGroup>
+      {!isLoading && (
+        <Form onSubmit={handleSubmit}>
+          {errors.global !== "" && <AlertError text={errors.global} />}
 
-        <FormGroup>
-          <label>Full Name</label>
-          <input
-            type="text"
-            name="fullname"
-            placeholder="Full Name"
-            value={fullname}
-            onChange={e => setFullname(e.target.value)}
-          />
-          {errors.fullname !== "" && <InlineError text={errors.fullname} />}
-        </FormGroup>
+          <FormGroup>
+            <label>User Name</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+            />
+            {errors.username !== "" && <InlineError text={errors.username} />}
+          </FormGroup>
 
-        <FormGroup>
-          <label>E-mail</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="E-mail Address"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          {errors.email !== "" && <InlineError text={errors.email} />}
-        </FormGroup>
+          <FormGroup>
+            <label>Full Name</label>
+            <input
+              type="text"
+              name="fullname"
+              placeholder="Full Name"
+              value={fullname}
+              onChange={e => setFullname(e.target.value)}
+            />
+            {errors.fullname !== "" && <InlineError text={errors.fullname} />}
+          </FormGroup>
 
-        <FormGroup>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          {errors.password !== "" && <InlineError text={errors.password} />}
-        </FormGroup>
+          <FormGroup>
+            <label>E-mail</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="E-mail Address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            {errors.email !== "" && <InlineError text={errors.email} />}
+          </FormGroup>
 
-        <FormGroup>
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm your Password Here"
-            value={confirmPassword}
-            onChange={e => setConfirPassword(e.target.value)}
-          />
-          {errors.confirmPassword !== "" && (
-            <InlineError text={errors.confirmPassword} />
-          )}
-        </FormGroup>
+          <FormGroup>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            {errors.password !== "" && <InlineError text={errors.password} />}
+          </FormGroup>
 
-        <FormGroup>
-          <button type="submit">Sign Up</button>
-        </FormGroup>
-      </Form>
+          <FormGroup>
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm your Password Here"
+              value={confirmPassword}
+              onChange={e => setConfirPassword(e.target.value)}
+            />
+            {errors.confirmPassword !== "" && (
+              <InlineError text={errors.confirmPassword} />
+            )}
+          </FormGroup>
+
+          <FormGroup>
+            <button type="submit">Sign Up</button>
+          </FormGroup>
+        </Form>
+      )}
     </SignUpFormStyled>
   )
 }

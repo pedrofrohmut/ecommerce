@@ -10,7 +10,8 @@ import SignUpBottons from "../components/containers/SignUpBottons"
 import SignUpForm from "../components/forms/SignUpForm"
 
 const SignUpPage = ({ signup, history }) => {
-  const handleSubmit = newUser => signup(newUser).then(() => history.push("/"))
+  const handleSubmit = newUser =>
+    signup(newUser).then(() => history.push("/signin"))
 
   return (
     <SignUpPageStyled className="SignUpPage">

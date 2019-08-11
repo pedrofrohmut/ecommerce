@@ -22,7 +22,7 @@ const ListTitleStyled = styled.div`
   line-height: 2.2;
   padding-left: 30px;
   border-bottom: 2px solid var(--grey7);
-  margin-bottom: 20px;
+  margin-bottom: 1.4rem;
 `
 
 export default ListTitle

@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Webapi.Models;
 using Webapi.Repositories;
 using Webapi.Repositories.Impl;
+using Microsoft.OpenApi.Models;
 
 namespace Webapi
 {
@@ -73,6 +74,9 @@ namespace Webapi
           };
         });
 
+      // Register the Swagger Generator, defining 1 or more swagger docs
+      services.AddSwaggerGen(config => config.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecommerce API", Version = "v1" }));
+
       // Startup Configuration in the Context
       services.AddSingleton<IConfiguration>(Configuration);
 
@@ -86,6 +90,15 @@ namespace Webapi
     {
       if (env.IsDevelopment())
         app.UseDeveloperExceptionPage();
+
+      // Middleware to gen Swagger as a JSON endpoint
+      app.UseSwagger();
+      // Specify Swagger endpoint
+      app.UseSwaggerUI(config =>
+      {
+        config.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecommerce API v1");
+        config.RoutePrefix = string.Empty; // redirects "/" to Swagger
+      });
 
       app.UseCors(builder => builder.WithOrigins(Configuration["ClientURL"]).AllowAnyHeader().AllowAnyOrigin());
 

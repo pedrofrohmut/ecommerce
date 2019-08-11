@@ -7,6 +7,7 @@ import Form from "../globals/forms/Form"
 import FormGroup from "../globals/forms/FormGroup"
 import InlineError from "../globals/messages/InlineError"
 import AlertError from "../globals/messages/AlertError"
+import LoadingSpinner from "../globals/loading/LoadingSpinner"
 
 const isValidEmail = email =>
   email !== "" && typeof email === "string" && validator.isEmail(email)
@@ -39,6 +40,8 @@ const SignInForm = ({ onSubmit }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const [errors, setErrors] = useState(INITIAL_ERRORS)
 
   const handleSubmit = (e) => {
@@ -50,8 +53,14 @@ const SignInForm = ({ onSubmit }) => {
     const formErrors = getFormErrors(formData)
     setErrors({ ...errors, ...formErrors })
     if (isValidForm(formErrors)) {
+      setIsLoading(true)
       onSubmit({ email, password }).catch((err) => {
-        setErrors({ ...errors, global: err.response.data.errors.global })
+        setIsLoading(false)
+        if (err.response) {
+          setErrors({ ...errors, global: err.response.data.errors.global })
+        } else {
+          setErrors({ ...errors, global: "No response from the server" })
+        }
       })
     }
   }
@@ -60,37 +69,40 @@ const SignInForm = ({ onSubmit }) => {
     <SignInFormStyled className="SignInForm">
       <h1>Sign In Form</h1>
 
-      <Form onSubmit={handleSubmit}>
-        {errors.global !== "" && <AlertError text={errors.global} />}
+      {isLoading && <LoadingSpinner text="Trying to login..." />}
 
-        <FormGroup>
-          <label htmlFor="email">E-mail</label>
-          <input
-            type="text"
-            name="email"
-            placeholder="E-mail Address"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          {errors.email !== "" && <InlineError text={errors.email} />}
-        </FormGroup>
+      {!isLoading && (
+        <Form onSubmit={handleSubmit}>
+          {errors.global !== "" && <AlertError text={errors.global} />}
+          <FormGroup>
+            <label htmlFor="email">E-mail</label>
+            <input
+              type="text"
+              name="email"
+              placeholder="E-mail Address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            {errors.email !== "" && <InlineError text={errors.email} />}
+          </FormGroup>
 
-        <FormGroup>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          {errors.password !== "" && <InlineError text={errors.password} />}
-        </FormGroup>
+          <FormGroup>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            {errors.password !== "" && <InlineError text={errors.password} />}
+          </FormGroup>
 
-        <FormGroup>
-          <button type="submit">Sign In</button>
-        </FormGroup>
-      </Form>
+          <FormGroup>
+            <button type="submit">Sign In</button>
+          </FormGroup>
+        </Form>
+      )}
     </SignInFormStyled>
   )
 }

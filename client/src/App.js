@@ -24,14 +24,9 @@ const App = ({ signinWithToken }) => {
       <BrowserRouter>
         <SiteHeader />
         <Switch>
-          {/*
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/signup" component={SignUpPage} />
-            <Route exact path="/signin" component={SignInPage} />
-            */}
           <Route exact path="/" component={HomePage} />
-          <GuestRoute exact path="/signup" component={SignUpPage} />
           <GuestRoute exact path="/signin" component={SignInPage} />
+          <GuestRoute exact path="/signup" component={SignUpPage} />
           <CustomerRoute
             exact
             path="/user/profile"
