@@ -3,8 +3,8 @@ import styled from "styled-components"
 import api from "../api/api"
 import { getRandomProducts } from "../utils/products"
 
-import ProductList from "../components/containers/ProductList"
-import MaratonaProductList from "../components/containers/MaratonaProductList"
+import ProductGrid from "../components/containers/ProductGrid"
+import MaratonaProductGrid from "../components/containers/MaratonaProductGrid"
 
 import PageContainer from "../components/globals/containers/PageContainer"
 import ListTitle from "../components/globals/titles/ListTitle"
@@ -33,9 +33,9 @@ const HomePage = () => {
         {!isLoadingProducts && (
           <>
             <ListTitle text="Maratona" red />
-            <MaratonaProductList products={maratonaProducts} />
+            <MaratonaProductGrid products={maratonaProducts} />
             <ListTitle text="Ofertas em destaque" />
-            <ProductList products={products} />
+            <ProductGrid products={products} />
           </>
         )}
       </PageContainer>
