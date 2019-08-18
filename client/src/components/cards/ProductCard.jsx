@@ -2,15 +2,15 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import { faCartPlus, faPlus } from "@fortawesome/free-solid-svg-icons"
 
 import { limitText } from "../../utils/format"
 
 import CardImage from "../globals/images/CardImage"
 import CardStars from "../globals/stars/CardStars"
 import CardPrice from "./CardPrice"
-import CardButtonComprar from "./CardButtonComprar"
-import CardButtonDetails from "./CardButtonDetails"
 import TagList from "./TagList"
+import IconButton from "../globals/buttons/IconButton"
 
 const ProductCard = ({ product }) => {
   const {
@@ -57,8 +57,8 @@ const ProductCard = ({ product }) => {
         discount={discount}
       />
       <div className="buttons">
-        <CardButtonComprar onClick={handleComprar} />
-        <CardButtonDetails onClick={handleDetails} />
+        <IconButton icon={faCartPlus} onClick={handleComprar} text="Comprar" />
+        <IconButton icon={faPlus} onClick={handleDetails} text="Detalhes" />
       </div>
       <TagList tags={tags} />
     </ProductCardStyled>
@@ -126,12 +126,6 @@ const ProductCardStyled = styled.div`
 
   .TagList {
     margin-top: 6px;
-  }
-
-  @media (min-width: 480px) {
-  }
-
-  @media (min-width: 768px) {
   }
 `
 

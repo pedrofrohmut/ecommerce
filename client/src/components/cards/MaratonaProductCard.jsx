@@ -1,12 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import { faCartPlus, faPlus } from "@fortawesome/free-solid-svg-icons"
 
 import CardImage from "../globals/images/CardImage"
 import CardOfferExpiresOn from "./CardOfferExpiresOn"
 import CardOfferInfo from "./CardOfferInfo"
 import MaratonaCardPrice from "./MaratonaCardPrice"
-import MaratonaCardButtonComprar from "./MaratonaCardButtonComprar"
+import IconButton from "../globals/buttons/IconButton"
 
 const MarantonaProductCard = ({ product }) => {
   const {
@@ -22,7 +23,11 @@ const MarantonaProductCard = ({ product }) => {
   const discount = 15
 
   const handleComprar = () => {
-    // TODO: maratona comprar passando id
+    // TODO: maratona comprar passing id
+  }
+
+  const handleDetails = () => {
+    // TODO: maratona details passing id
   }
 
   return (
@@ -36,7 +41,22 @@ const MarantonaProductCard = ({ product }) => {
         price={newPrice}
         discount={discount}
       />
-      <MaratonaCardButtonComprar onClick={handleComprar} />
+      <div className="buttons">
+        <IconButton
+          icon={faCartPlus}
+          iconBackground="var(--fullBlack)"
+          background="var(--mainRed-1)"
+          onClick={handleComprar}
+          text="Comprar"
+        />
+        <IconButton
+          icon={faPlus}
+          iconBackground="var(--fullBlack)"
+          background="var(--mainRed-1)"
+          onClick={handleDetails}
+          text="Detalhes"
+        />
+      </div>
     </MarantonaProductCardStyled>
   )
 }
@@ -77,6 +97,11 @@ const MarantonaProductCardStyled = styled.div`
 
   .MaratonaCardPrice {
     margin-bottom: 13px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
   }
 `
 

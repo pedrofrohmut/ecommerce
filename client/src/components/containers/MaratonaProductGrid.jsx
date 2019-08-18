@@ -44,6 +44,19 @@ const MaratonaProductGridStyled = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     justify-items: center;
     grid-gap: 28px;
+    margin-bottom: 1.5rem;
+  }
+
+  .maratona-link {
+    color: var(--fullWhite);
+    background-color: var(--mainRed-1);
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.8rem;
+    display: block;
+    text-align: right;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 `
 
