@@ -13,6 +13,7 @@ using Webapi.Models;
 using Webapi.Repositories;
 using Webapi.Repositories.Impl;
 using Microsoft.OpenApi.Models;
+using System.Data.SqlClient;
 
 namespace Webapi
 {
@@ -82,7 +83,7 @@ namespace Webapi
 
       // REPOSITORIES
       services.AddScoped<TokenGenerator>();
-      services.AddScoped<IProductsService, ProductsService>();
+      services.AddScoped<IProductsService, ProductsServiceDapper>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
